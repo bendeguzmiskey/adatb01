@@ -1,0 +1,68 @@
+:history
+
+//21
+match (p:Person)-[:ACTED_IN]->(m:Movie)<-[:DIRECTED]-(p:Person)
+return p.name;
+
+//21
+match (p:Person)-[:ACTED_IN]->(m.Movie)<-[:DIRECTED]-(p:Person)
+return p.name;
+
+//21
+match (p:Person)-[:ACTED_IN]->(m.movie)<-[:DIRECTED]-(p:Person)
+return p.name;
+
+MATCH (n:Movie) RETURN n LIMIT 25;
+
+//20
+match (p:Person)-[:DIRECTED]->(m:Movie)
+with p.name as nev, count(*) as db
+where db > 1
+return nev, db;
+
+//20
+match (p:Person)-[:DIRECTED]->(m:Movie)
+return p.name, count(*);
+
+MATCH (n:Movie) RETURN n LIMIT 25;
+
+//19
+match (p:Person)-[:PRODUCED]->(m:Movie)
+where p.name = "Joel Silver"
+return m.title;
+
+//29;
+
+MATCH (n:Movie) RETURN n LIMIT 25;
+
+//18
+match (m:Movie)
+where m.title starts with "A"
+return m.title, m.released
+order by m.released DESC;
+
+//18
+match (m:Movie)
+where m.title starts with "A"
+return m.title, m.released;
+
+//18
+match (m:Movie)
+where starts with "A"
+return m.title, m.released;
+
+//18;
+
+MATCH (n:Movie) RETURN n LIMIT 25;
+
+match (p:Person)
+where p.born=1965 or p.born = 1964
+return p.name, p.born;
+
+MATCH (n:Movie) RETURN n LIMIT 25;
+
+match (p:Person)
+where p.born=1965 or p.born = 1964
+return p.name, p.born;
+
+match (p:Person);
