@@ -1,0 +1,25 @@
+1.Feladat
+Filter:
+{$and:[{"genres.0":"Short"},{$and:[{"year":{$gte:1945}},{"year":{$lte:1970}}]}]}
+Project:
+{"_id":0,"year":1,"title":1}
+Sort:
+{"year":1,"title":1}
+
+2.Feladat
+db.users.find({"email":{$regex:/.com/}},{"_id":0,"name":1,"email":1})
+
+3.Feladat
+db.movies.aggregate([{"$match":{"year":{$gt:1950}}},{"$group":{_id:"$rated",avg:{$avg:"$runtime"}}}])
+
+4.Feladat
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WITH m.title as cim, COUNT(*) as db
+ORDER BY db desc
+RETURN cim, db
+LIMIT 1
+
+5.Feladat
+MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
+WHERE p.born>1980
+RETURN p.name as Actor, p.born as BirthYear, COUNT(m.title) as NumMoviesActedIn
